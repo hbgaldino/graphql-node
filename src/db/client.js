@@ -4,8 +4,8 @@ const executeSQL = async (query, bind) => {
   try {
 
     const conn = await oracledb.getConnection({
-      user: "system",
-      password: "oracle",
+      user: "graphql",
+      password: "pomarola",
       connectionString: "localhost:1521/xe"
     });
 

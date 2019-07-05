@@ -10,6 +10,7 @@
   "dependencies": {
     "apollo-server": "^2.6.7",
     "graphql": "^14.4.2",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "oracledb": "^3.1.2"
   },
