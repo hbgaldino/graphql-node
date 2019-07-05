@@ -5,8 +5,9 @@ import { companyResolver } from '../resolver/company';
 
 const typeDefs = gql`
   type User {
-    title: String
-    author: String
+    id: ID!
+    first_name: String
+    last_name: String
   }
 
   type Company {

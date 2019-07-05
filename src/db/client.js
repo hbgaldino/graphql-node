@@ -1,28 +1,22 @@
 import oracledb from 'oracledb';
 
-const executeSQL = async () => {
+const executeSQL = async (query, bind) => {
   try {
 
     const conn = await oracledb.getConnection({
       user: "system",
-      password: "oracle",      
+      password: "oracle",
       connectionString: "localhost:1521/xe"
     });
 
-    const bind = {};
     const options = {
       outFormat: oracledb.OBJECT
     };
 
-    const result = await conn.execute(`SELECT * FROM HR.JOBS`, bind, options);  
-    console.log(result);
-
+    return conn.execute(query, bind, options);
   } catch (err) {
     console.error(err);
   }
 }
 
 export { executeSQL };
-
-
-

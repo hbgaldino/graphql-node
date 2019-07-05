@@ -1,10 +1,9 @@
-import { executeSQL } from '../db/client';
+import { fetchUsers } from '../service/user';
 
 const userResolver = {
   Query: {
-    users: (parent, args, context, info) => {
-      console.log(`User resolver!!!`)
-      executeSQL();
+    users: async (parent, args, context, info) => {
+      return await fetchUsers();
     }
   }
 }
