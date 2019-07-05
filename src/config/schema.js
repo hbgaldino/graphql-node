@@ -8,6 +8,19 @@ const typeDefs = gql`
     id: ID!
     first_name: String
     last_name: String
+    email: String
+    phone_number: String
+    hire_date: String
+    salary: Float
+    job_id: ID!
+    job: Job
+  }
+
+  type Job {
+    id: ID!
+    title: String!
+    min_salary: Float!
+    max_salary: Float!
   }
 
   type Company {
