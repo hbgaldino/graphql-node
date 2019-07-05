@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { makeExecutableSchema, gql } from 'apollo-server';
-import { userResolver } from '../resolver/user';
-import { companyResolver } from '../resolver/company';
+import { userResolver } from '../resolver/user-resolver';
+import { companyResolver } from '../resolver/company-resolver';
 
 const typeDefs = gql`
   type User {

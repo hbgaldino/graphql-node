@@ -30,5 +30,4 @@ const fetchJob = async (job_id) => {
   }
 }
 
-
 export { fetchUsers, fetchJob };
