@@ -28,7 +28,7 @@ export const fetchUser = async (parent, { id }, { authUser }) => {
   if (!authUser || !authUser.roles.includes('ADMIN'))
     throw new AuthenticationError('Unauthorized access');
 
-    
+
   const result = await executeSQL(`SELECT * FROM EMPLOYEE WHERE ID = :1`, [id]);
   const row = result.rows[0];
 
@@ -47,4 +47,11 @@ export const fetchUser = async (parent, { id }, { authUser }) => {
 export const fetchUserRole = async ({ id }) => {
   const result = await executeSQL('SELECT R.ID, R.NAME FROM EMPLOYEE_ROLES E JOIN ROLES R ON (E.ID_ROLE = R.ID) WHERE E.ID_EMPLOYEE = :1', [id]);
   return result.rows.map(row => ({ id: row.ID, name: row.NAME }));
+}
+
+export const createUser = async ({ user }) => {
+  await executeSQL(`BEGIN
+                      SP_CREATE_USER(:fullName, :username, :password, :email);
+                    END;`, user);
+  return "successfuly";
 }

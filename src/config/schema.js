@@ -24,8 +24,16 @@ const typeDefs = gql`
     getUser(id: ID!): User
   }
 
+  input UserInput {
+    username: String!
+    password: String!
+    email: String!
+    fullName: String!
+  }
+
   type Mutation {
     authenticate(username: String!, password: String!): String!
+    createUser(user: UserInput): String
   } 
 `;
 
