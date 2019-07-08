@@ -1,6 +1,13 @@
 import { executeSQL } from "../db/client";
+import { AuthenticationError } from "apollo-server";
 
-const fetchUsers = async (parent, args, { authUser }) => {
+export const fetchUsers = async (parent, args, { authUser }) => {
+
+  // checking if user is loggedin and has the ADMIN role
+  if (!authUser || !authUser.roles.includes('ADMIN'))
+    throw new AuthenticationError('Unauthorized access');
+
+
   const result = await executeSQL(`SELECT * FROM EMPLOYEE WHERE ROWNUM <= :1`, [10]);
 
   const users = result.rows.map((row) => ({
@@ -14,5 +21,3 @@ const fetchUsers = async (parent, args, { authUser }) => {
 
   return users;
 }
-
-export { fetchUsers };

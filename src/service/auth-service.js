@@ -22,7 +22,7 @@ export const authenticate = async ({ username, password }) => {
     fullName: userRow.FULL_NAME,
     username: userRow.USERNAME,
     email: userRow.EMAIL,
-    groups: userData.rows.map(row => (row.ROLE_NAME))
+    roles: userData.rows.map(row => (row.ROLE_NAME))
   };
 
   return jwt.sign(tokenPayload, key, { expiresIn: 60 });
