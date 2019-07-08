@@ -25,7 +25,7 @@ export const authenticate = async ({ username, password }) => {
     roles: userData.rows.map(row => (row.ROLE_NAME))
   };
 
-  return jwt.sign(tokenPayload, key, { expiresIn: 60 });
+  return jwt.sign(tokenPayload, key, { expiresIn: '1 hour' });
 }
 
 export const verifyAuthToken = (token) => {

@@ -21,3 +21,8 @@ export const fetchUsers = async (parent, args, { authUser }) => {
 
   return users;
 }
+
+export const fetchUserRole = async ({ id }) => {
+  const result = await executeSQL('SELECT R.ID, R.NAME FROM EMPLOYEE_ROLES E JOIN ROLES R ON (E.ID_ROLE = R.ID) WHERE E.ID_EMPLOYEE = :1', [id]);
+  return result.rows.map(row => ({ id: row.ID, name: row.NAME }));
+}

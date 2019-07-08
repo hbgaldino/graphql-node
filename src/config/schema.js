@@ -11,6 +11,12 @@ const typeDefs = gql`
     fullName: String
     hireDate: String
     birthDate: String
+    roles: [Role]
+  }
+
+  type Role {
+    id: ID!
+    name: String!
   }
 
   type Query {
