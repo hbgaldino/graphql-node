@@ -4,7 +4,7 @@ import { AuthenticationError } from 'apollo-server';
 
 const key = 'cQfTjWnZr4u7x!A%D*G-KaPdSgUkXp2s';
 
-const authenticate = async ({ username, password }) => {
+export const authenticate = async ({ username, password }) => {
   const userData = await executeSQL('SELECT * FROM EMPLOYEE WHERE USERNAME = :1 AND PASSWORD = :2', [username, password]);
 
   if (userData.rows.length === 0)
@@ -18,16 +18,13 @@ const authenticate = async ({ username, password }) => {
     email: userRow.EMAIL
   };
 
-  return jwt.sign(tokenPayload, key, { expiresIn: '1 hour' });
+  return jwt.sign(tokenPayload, key, { expiresIn: 60000 });
 }
 
-const verifyAuthToken = (token) => {
+export const verifyAuthToken = (token) => {
   try {
     return jwt.verify(token, key);
   } catch (err) {
     return null;
   }
 }
-
-
-export { authenticate, verifyAuthToken };

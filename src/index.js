@@ -5,7 +5,7 @@ import Schema from './config/schema';
 const server = new ApolloServer({
   schema: Schema,
   context: ({ req }) => {
-    return verifyAuthToken(req.headers.authorization || '');
+    return { authUser: verifyAuthToken(req.headers.authorization || '') };
   }
 });
 
