@@ -1,6 +1,8 @@
 import { executeSQL } from "../db/client";
 
-const fetchUsers = async () => {
+const fetchUsers = async (parent, context, args, info) => {
+  console.log(context);
+
   const result = await executeSQL(`SELECT * FROM EMPLOYEE WHERE ROWNUM <= :1`, [10]);
 
   const users = result.rows.map((row) => ({

@@ -1,12 +1,12 @@
 import { ApolloServer } from 'apollo-server';
-import { generateAuthToken, verifyAuthToken } from './config/auth-provider';
+import { verifyAuthToken } from './service/auth-service';
 import Schema from './config/schema';
 
 const server = new ApolloServer({
   schema: Schema,
-  // context: ({ req }) => {
-  //   return verifyAuthToken(req.headers.authorization || '');
-  // }
+  context: ({ req }) => {
+    return verifyAuthToken(req.headers.authorization || '');
+  }
 });
 
 server.listen().then(({ url }) => {

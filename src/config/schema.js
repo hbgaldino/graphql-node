@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 import { makeExecutableSchema, gql } from 'apollo-server';
-import { userResolver } from '../resolver/user-resolver';
+import UserResolver from '../resolver/user-resolver';
+import AuthResolver from '../resolver/auth-resolver';
 
 const typeDefs = gql`
   type User {
@@ -15,10 +16,14 @@ const typeDefs = gql`
   type Query {
     users: [User]
   }
+
+  type Mutation {
+    authenticate(username: String!, password: String!): String!
+  } 
 `;
 
 
 export default makeExecutableSchema({
   typeDefs: [typeDefs],
-  resolvers: merge(userResolver)
+  resolvers: merge(UserResolver, AuthResolver)
 });
